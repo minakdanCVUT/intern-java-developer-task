@@ -23,10 +23,13 @@ public class DailyMeals {
 
     private Date date;
 
-    @OneToMany
+    @OneToMany(mappedBy = "dailyMeals", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Meal> meals = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="users_id")
     private User user;
+
+    @Embedded
+    private NutritionStats nutritionStats;
 }

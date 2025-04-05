@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.enums.MealType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="meals")
+@Table(name="meal")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +21,15 @@ public class Meal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "meals", cascade = CascadeType.ALL, orphanRemoval = true)
+    private MealType type;
+
+    @OneToMany(mappedBy = "meal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Dish> dishes = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "daily_meals_id")
+    private DailyMeals dailyMeals;
+
+    @Embedded
+    private NutritionStats nutritionStats;
 }
