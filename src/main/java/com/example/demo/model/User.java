@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="users")
+@Table(name="user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,6 +20,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private boolean isMale;
 
     private String name;
 
@@ -33,6 +35,18 @@ public class User {
 
     private GoalType type;
 
+    private double normalCaloriesCount;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DailyMeals> dailyMeals = new ArrayList<>();
+
+    public User(boolean isMale, String name, String email, int age, double weight, int height, GoalType type) {
+        this.isMale = isMale;
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.weight = weight;
+        this.height = height;
+        this.type = type;
+    }
 }
