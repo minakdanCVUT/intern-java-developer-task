@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="dishes")
+@Table(name="dish")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,9 +19,10 @@ public class Dish {
 
     private String name;
 
-    private double caloriesPerServing;
+    @Embedded
+    private NutritionStats nutritionStats;
 
-    private double fat;
-    private double protein;
-    private double carbohydrates;
+    @ManyToOne
+    @JoinColumn(name="meal_id")
+    private Meal meal;
 }
