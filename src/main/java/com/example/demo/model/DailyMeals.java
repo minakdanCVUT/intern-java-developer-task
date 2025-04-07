@@ -6,8 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,7 +21,7 @@ public class DailyMeals {
     @GeneratedValue
     private Long id;
 
-    private Date date;
+    private LocalDate date;
 
     @OneToMany(mappedBy = "dailyMeals", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Meal> meals = new ArrayList<>();
