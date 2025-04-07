@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="dish")
 @Data
@@ -22,7 +25,6 @@ public class Dish {
     @Embedded
     private NutritionStats nutritionStats;
 
-    @ManyToOne
-    @JoinColumn(name="meal_id")
-    private Meal meal;
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DishMeal> dishMeals = new ArrayList<>();
 }

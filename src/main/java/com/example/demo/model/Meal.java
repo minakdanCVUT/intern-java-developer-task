@@ -24,7 +24,7 @@ public class Meal {
     private MealType type;
 
     @OneToMany(mappedBy = "meal", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Dish> dishes = new ArrayList<>();
+    private List<DishMeal> dishMeals = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "daily_meals_id")
